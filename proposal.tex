@@ -27,52 +27,56 @@
 
 \begin{enumerate}
   \item[Purpose] 
-    
-    Introduction paragraph:
-    
+
     Our visualization will be a display of stock data for a company
     overlaid with data relating to how often that company is mentioned
-    in social media, or search for on the internet. We plan to let
+    in social media, or searched for on the internet. We plan to let
     users look over various time frames, and highlight when either the
-    stock price or mentions increase quickly. Possibly look at if it
-    differs in location.
-
-    What questions will users be able to answer?
+    stock price or mentions increase quickly. Possibly also look at
+    popularity in diffrent locations and look at news data for that
+    company in specified a time frame. 
     
-    Hopefully users will be able to understand better the effects
-    stocks have on social media, and social media on
-    stocks. Potentially be able to understand which precedes the
-    others, and in what types of situations will one come before the
-    other? When social media comes first, what effect does it have?
+    Hopefully users will be able to understand better the relationship between
+    stocks and social media.
+    Potentially they be able to understand which precedes the
+    other, and in what types of situations will one come before the
+    other.  When social media comes first, what effect does it have?
     Looking at location data, we predict that where it is trending
     won't matter in terms of how it will effect the stock price.
 
-    Also, does publicity tend to be good or bad?
+    We predict that when stock plumets that social
+    media will subsequently will increase, and that when stock price
+    drastically increases, social media mentions will also
+    increase. 
 
-    What could those answers be? Best guess?
-    
-    We predict that around the same time stock plumet that social
-    media mentions will increase.
-
-    What makes these questions complex enough to require a
-    visualization?
-
-    Lot of data, somewhat hard to look at all of it, and pair
-    together. Unless you look at them overlapped, its difficult to
-    find the relation.
+    The amount of data involved in this question makes understanding
+    what is going on harder without a visualization. By providing a
+    visualization with which someone can examine multiple data sets
+    simultaneously we will be able to get a better sense for
+    where to direct future questions, and what the general predictions
+    we can draw are.
     
   \item[Design]
     
-    Explain how visualization will work:
+    Our visualization will include a plot with an x-axis of time and
+    two y-axes. One y-axis will be stock values, and the other will be
+    the social media metric from 0 to 100. Using this plot
+    we will graph changes in stock prices over time and changes in the
+    social media metric.
 
+    To the left of this we will have a checklist of different keyword
+    and stock combinations to choose from.
 
-    Include visualization attached
+    Just beneath the plot, we will have a slider which controls the
+    time period to display data in. Below that,
+    we will include a world map, where darker shaded areas signifiy
+    places where the selected keyword is historically more talked
+    about in the country.
 
   \item[Techniques]
 
-    We will be using Google trends data, and Yahoo's API to look at
-    past stock data. We also will investigate using redit, facebook
-    twitter and new york times data, but we currently have access to the Google
+    We will be using Google trends data, and Yahoo'spast stock data. We also will investigate using redit, facebook
+    twitter and new york times data, but we currently only have access to the Google
     trends, and Yahoo data.
 
 \end{enumerate}
