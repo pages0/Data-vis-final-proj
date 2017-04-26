@@ -7,3 +7,15 @@ https://nces.ed.gov/ccd/ccddata.asp
 https://nces.ed.gov/ccd/
 
 https://www.census.gov/topics/education.html#tab2
+
+New York Times Developer Site:
+http://developer.nytimes.com/
+
+Google BigQuery Reddit: 
+https://bigquery.cloud.google.com/welcome
+
+Yahoo Finance Stock Data (Tesla Example):
+https://finance.yahoo.com/quote/TSLA/history?p=TSLA
+
+Google Trends Data:
+https://trends.google.com/trends/
