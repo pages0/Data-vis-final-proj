@@ -11,7 +11,7 @@ var svg = d3.select("svg"),
 //height and width of svg's
 
 // parse by year-month-day
-var parseTime = d3.timeParse("%y-%b-%d");
+var parseTime = d3.timeParse("%Y-%m-%d");
 
 var scaleTime = d3.scaleTime().rangeRound([0,svg_width]);
 
@@ -31,13 +31,42 @@ d3.queue()
     // process data here!
       for (d in united_stock){
 	  d.Date = parseTime(d.Date);
+	  d.Close = +d.Close;
       }
       for (d in united_google_trends){
 	  d.Date = parseTime(d.Date);
-      }
+	  d.Close = +d.Close;
+      }      
+      
+      scaleTime.domain(d3.extent(united_stock, function(d) { return d.Date; }));
+      scaleStock.domain(d3.extent(united_stock, function(d) { return d.Close; }));
+      
+      g.append("g")
+	  .attr("transform", "translate(0," + svg_height + ")")
+	  .call(d3.axisBottom(scaleTime))
+	  .select(".domain")
+	  .remove();
+      
+      g.append("g")
+	  .call(d3.axisLeft(scaleStock))
+	  .append("text")
+	  .attr("fill", "#000")
+	  .attr("transform", "rotate(-90)")
+	  .attr("y", 6)
+	  .attr("dy", "0.71em")
+	  .attr("text-anchor", "end")
+	  .text("Price ($)");
 
-
-
-
-    
+      console.log(united_stock);
+      console.log(stockLine);
+      
+      g.append("path")
+	  .datum(united_stock)
+	  .attr("fill", "none")
+	  .attr("stroke", "steelblue")
+	  .attr("stroke-linejoin", "round")
+	  .attr("stroke-linecap", "round")
+	  .attr("stroke-width", 1.5)
+	  .attr("d", stockLine);
+      
   });
