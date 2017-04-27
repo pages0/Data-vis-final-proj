@@ -1,7 +1,7 @@
 /* Created  on 4-17-17 by Nick Roberson, Reilly Grant, and Connor GT */
 // Used https://bl.ocks.org/mbostock/3883245
 
-d3.select("body").append("svg").attr("width", 960).attr("height",500);
+d3.select('#svg_area').append("svg").attr("width", 800).attr("height",450);
 
 var svg = d3.select("svg"),
     margin = {top: 20, right: 20, bottom: 30, left: 50},
@@ -27,7 +27,7 @@ var trendLine =d3.line()
     .x(function(d) { return scaleTime(d.Date);} )
     .y(function(d) { return scaleSocial(d.SearchIndex);});
 
-// queue data for loading here 
+// queue data for loading here
 d3.queue()
   .defer( d3.csv, 'data/UNITED_STOCK.csv' )
   .defer( d3.csv, 'data/UNITED_GOOGLE_TRENDS.csv' )
@@ -46,21 +46,21 @@ d3.queue()
 	  d.Date = parseTime(d.Date);
 	  console.log(d.Date);
 	  d.SearchIndex = +d.SearchIndex;
-      }      
+      }
       console.log(d3.extent(united_stock, function(d) { return d.Date; }));
       console.log(d3.max(united_stock, function(d) { return d.Date; }));
       console.log(d3.min(united_stock, function(d) { return d.Date; }));
       console.log(d3.min(united_google_trends, function(d) { return d.Date; }));
-      
+
       scaleTime.domain(d3.extent(united_stock, function(d) { return d.Date; }));
       scaleStock.domain(d3.extent(united_stock, function(d) { return d.Close; }));
       scaleSocial.domain(d3.extent(united_google_trends, function(d) { return d.SearchIndex; }));
-      
+
       g.append("g")
 	  .attr("transform", "translate(0," + svg_height + ")")
 	  .call(d3.axisBottom(scaleTime))
 	  .select(".domain");
-      
+
       g.append("g")
 	  .call(d3.axisLeft(scaleStock))
 	  .append("text")
@@ -79,7 +79,7 @@ d3.queue()
 	  .attr("stroke-linecap", "round")
 	  .attr("stroke-width", 1.5)
 	  .attr("d", trendLine);
-   
+
       g.append("path")
 	  .datum(united_stock)
 	  .attr("fill", "none")
@@ -88,5 +88,5 @@ d3.queue()
 	  .attr("stroke-linecap", "round")
 	  .attr("stroke-width", 1.5)
 	  .attr("d", stockLine);
-      
+
   });
