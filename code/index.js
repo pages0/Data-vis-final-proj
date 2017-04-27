@@ -1,12 +1,21 @@
 /* Created  on 4-17-17 by Nick Roberson, Reilly Grant, and Connor GT */
 // Used https://bl.ocks.org/mbostock/3883245
 
-displayData('AMAZON');
+displayData('UNITED');
 
 d3.queue()
     .defer( d3.csv, 'data/NAMES.csv' )
     .await(function(error , names) {
-	d3.select('#company').selectAll('option')
+	var dropDown =
+	    d3.select('#filters')
+	    .append('select')
+	    .attr('id','companies')
+	    .on('change',function() {
+		console.log("test");
+		displayData(d3.select(this).node().value);
+	    });
+
+	dropDown.selectAll('option')
 	    .data(names)
 	    .enter()
 	    .append('option')
@@ -18,14 +27,10 @@ d3.queue()
     });
 
 
-d3.select('#company')
-    .on('change', function() {
-	displayData(d3.select(this).node().value);
-    });
 
 function displayData(FileName) {
     d3.select("svg").remove();
-    d3.select("body").append("svg").attr("width", 960).attr("height",500);
+    d3.select('#svg_area').append("svg").attr("width", 800).attr("height",450);
     
     var svg = d3.select("svg"),
 	margin = {top: 20, right: 50, bottom: 30, left: 50},
@@ -125,3 +130,6 @@ function displayData(FileName) {
 	    
 	});
 }
+
+
+

@@ -1,18 +1,13 @@
 <!DOCTYPE html>
 <html>
   <head>
+
     <meta charset="utf-8">
     <title>Popularity vs. Price</title>
     <link rel="stylesheet" type="text/css" href="lab.css">
-    
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-
-    <!-- Optional theme -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-
+    <!-- IMPORT BOOTSTRAP -->
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     
@@ -21,19 +16,31 @@
     <script src="crossfilter.min.js"></script>
     <script type="text/javascript" src="https://d3js.org/d3.v4.min.js"></script>
     <script src="http://d3js.org/topojson.v1.min.js"></script>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- IMPORT D3 -->
     <script type="text/javascript" src="https://d3js.org/d3.v4.min.js"></script>
+
   </head>
   <body>    
-<div id="controls" class="col-sm-3 col-md-3 col-lg-2 sidebar">
-    <h1>Popularity vs. Price</h1>
-          
-          <h4>Companies</h4>
-          <select id="company">
-	      
-          </select>
-          
+      <h1>Popularity vs. Price <small>Nick Roberson, Reilly Grant, and Connor GT</small></h1>
+    </div>
+    <div class="row">
+      <div class="col-lg-3 standard-padding">
+        <div class="well well-lg sidebar-height">
+          <h3 class="center-block"> Companies </h3>
+          <div class="center-block" id="filters">
+	    
+	  </div>
         </div>
-    <script type="text/javascript" src="index.js"></script>
-
+      </div>
+      <div class="col-lg-9 standard-padding">
+        <h2 id="svg-title">Popularity V.S. Price</h2>
+        <div id="svg_area"></div>
+        <script type="text/javascript" src="helpers.js"></script>
+        <script type="text/javascript" src="index.js"></script>
+      </div>
+    </div>
   </body>
 </html>
