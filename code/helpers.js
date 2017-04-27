@@ -1,9 +1,8 @@
 var addCompanies = function(selector, company_list) {
 
-  var company_list2 = ["A","B","VC"];
   var options = selector
     .selectAll('option')
-  	.data(company_list2).enter()
+  	.data(company_list).enter()
   	.append('option')
   		.text(function (d) { return d; });
 }
