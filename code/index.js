@@ -1,7 +1,7 @@
 /* Created  on 4-17-17 by Nick Roberson, Reilly Grant, and Connor GT */
 // Used https://bl.ocks.org/mbostock/3883245
 
-displayData('UNITED');
+displayData('AMAZON');
 
 d3.queue()
     .defer( d3.csv, 'data/NAMES.csv' )
@@ -11,7 +11,6 @@ d3.queue()
 	    .append('select')
 	    .attr('id','companies')
 	    .on('change',function() {
-		console.log("test");
 		displayData(d3.select(this).node().value);
 	    });
 
