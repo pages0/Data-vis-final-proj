@@ -9,6 +9,11 @@ var svg = d3.select("svg"),
     svg_height = +svg.attr("height") - margin.top - margin.bottom,
     g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
+var selector = d3.select('#filters')
+                  .append('select')
+      	          .attr('class','select')
+                  .on('change',onchange)
+addCompanies(selector,[]);
 //height and width of svg's
 
 // parse by year-month-day
@@ -38,33 +43,30 @@ d3.queue()
       var dates = [];
 
       for (d of united_stock){
-	  d.Date = parseTime(d.Date);
-	  dates.push(d.Date);
-	  d.Close = +d.Close;
+	       d.Date = parseTime(d.Date);
+	       dates.push(d.Date);
+	       d.Close = +d.Close;
       }
 
       for (d of united_google_trends){
-	  d.Date = parseTime(d.Date);
-	  dates.push(d.Date);
-	  console.log(d);
-	  console.log(d.Date);
-	  console.log(d.SearchIndex);
-	  d.SearchIndex = +d.SearchIndex;
-<<<<<<< HEAD
+	       d.Date = parseTime(d.Date);
+	        dates.push(d.Date);
+	         console.log(d);
+	          console.log(d.Date);
+	           console.log(d.SearchIndex);
+	            d.SearchIndex = +d.SearchIndex;
       }
+
       console.log(d3.extent(united_stock, function(d) { return d.Date; }));
       console.log(d3.max(united_stock, function(d) { return d.Date; }));
       console.log(d3.min(united_stock, function(d) { return d.Date; }));
       console.log(d3.min(united_google_trends, function(d) { return d.Date; }));
 
       scaleTime.domain(d3.extent(united_stock, function(d) { return d.Date; }));
-=======
-      }      
+
 
 
       scaleTime.domain(d3.extent(dates, function(d) { return d; }));
-      
->>>>>>> ca8bee6b66c1b4ac27d58218b28f2b915e68ebf2
       scaleStock.domain(d3.extent(united_stock, function(d) { return d.Close; }));
       scaleSocial.domain(d3.extent(united_google_trends, function(d) { return d.SearchIndex; }));
 
