@@ -23,9 +23,10 @@ var selector = d3.select('#filters')
       	          .attr('class','select')
                   .on('change', onChange);
 
-var companies = ["United Airlines", "Starbucks", "Pepsi", "Wendys", "Tesla"];
-companies.sort();
-addCompanies(selector,companies);
+var company_names= ["United", "Starbucks", "Pepsi", "Wendys", "Tesla"];
+var companies;
+company_names.sort();
+addCompanies(selector,company_names);
 //height and width of svg's
 
 // parse by year-month-day
@@ -67,52 +68,86 @@ d3.queue()
       wendys_google_trends = wendys_google_trends.reverse();
       starbucks_google_trends = starbucks_google_trends.reverse();
       tesla_google_trends = tesla_google_trends.reverse();
-      // process data here!
-      var dates = [];
+      companies = { Pepsi : { stock : pepsi_stock,
+                                  social : pepsi_google_trends,
+                                  dates : null,
+                                  name : "Pepsi"},
+                        Starbucks : { stock : starbucks_stock,
+                                      social : starbucks_google_trends,
+                                      dates : null,
+                                      name : "Starbucks"},
+                        Tesla : { stock : tesla_stock,
+                                  social : tesla_google_trends,
+                                  dates : null,
+                                  name : "Tesla"},
+                        Wendys : { stock : wendys_stock,
+                                   social : wendys_google_trends,
+                                   dates : null,
+                                   name : "Wendys"},
+                        United : { stock : united_stock,
+                                   social : united_google_trends,
+                                   dates : null,
+                                   name : "United Airlines"}
+                      };
 
-      for (d of united_stock){
-	       d.Date = parseTime(d.Date);
-	       dates.push(d.Date);
-	       d.Close = +d.Close;
+      for (company in companies) {
+        //console.log(companies[company]);
+        var dates = [];
+        // process the stock data
+        for (d of companies[company].stock) {
+            //console.log(d);
+            d.Date = parseTime(d.Date);
+            dates.push(d.Date);
+            d.Close = +d.Close;
+        }
+        companies[company].dates = dates;
+
+        // process the social data
+        for (d of companies[company].social) {
+             //console.log(d);
+             d.Date = parseTime(d.Date);
+             dates.push(d.Date);
+             //console.log(d);
+             //console.log(d.Date);
+             //console.log(d.Popularity);
+             d.Popularity = +d.Popularity;
+        }
       }
+      //console.log(d3.extent(united_stock, function(d) { return d.Date; }));
+      //console.log(d3.max(united_stock, function(d) { return d.Date; }));
+      //console.log(d3.min(united_stock, function(d) { return d.Date; }));
+      //console.log(d3.min(united_google_trends, function(d) { return d.Date; }));
 
-      for (d of united_google_trends){
-	       d.Date = parseTime(d.Date);
-	       dates.push(d.Date);
-	       console.log(d);
-	       console.log(d.Date);
-	       console.log(d.Popularity);
-	       d.Popularity = +d.Popularity;
-      }
-
-      console.log(d3.extent(united_stock, function(d) { return d.Date; }));
-      console.log(d3.max(united_stock, function(d) { return d.Date; }));
-      console.log(d3.min(united_stock, function(d) { return d.Date; }));
-      console.log(d3.min(united_google_trends, function(d) { return d.Date; }));
-
-      scaleTime.domain(d3.extent(united_stock, function(d) { return d.Date; }));
-      scaleTime.domain(d3.extent(dates, function(d) { return d; }));
-      scaleStock.domain(d3.extent(united_stock, function(d) { return d.Close; }));
-      scaleSocial.domain(d3.extent(united_google_trends, function(d) { return d.Popularity; }));
-
-      data_map["EX"] = "HEY!";
-      data_map["UA"] = {
-                          stocks : united_stock,
-                          social : united_google_trends
-                       };
-      console.log(data_map["UA"]);
-
+      setScales(companies[current_company]);
       drawAxis();
       drawPaths();
   });
 
 var updateChart = function() {
+  console.log("Calling updateChart()");
+  setScales(companies[current_company]);
+  removeLines();
+  drawPaths();
+  drawAxis();
+};
 
+var setScales = function(company_data) {
+  scaleTime.domain(d3.extent(company_data.stock, function(d) { return d.Date; }));
+  scaleTime.domain(d3.extent(company_data.dates, function(d) { return d; }));
+  scaleStock.domain(d3.extent(company_data.stock, function(d) { return d.Close; }));
+  scaleSocial.domain(d3.extent(company_data.social, function(d) { return d.Popularity; }));
+}
+
+var removeLines = function() {
+  g.selectAll("path").remove();
+  g.selectAll("g").remove();
 };
 
 var drawPaths = function() {
+  console.log(current_company + " : " + companies[current_company].socialx);
+  if (companies[current_company].social != null && companies[current_company].stock != null) {
     g.append("path")
-     .datum(data_map["UA"].social)
+     .datum(companies[current_company].social )
      .attr("fill", "none")
      .attr("stroke", "green")
      .attr("stroke-linejoin", "round")
@@ -121,13 +156,14 @@ var drawPaths = function() {
      .attr("d", trendLine);
 
     g.append("path")
-     .datum(data_map["UA"].stocks)
+     .datum(companies[current_company].stock)
      .attr("fill", "none")
      .attr("stroke", "steelblue")
      .attr("stroke-linejoin", "round")
      .attr("stroke-linecap", "round")
      .attr("stroke-width", 1.5)
      .attr("d", stockLine);
+   }
   };
 
 var drawAxis = function() {

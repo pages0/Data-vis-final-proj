@@ -11,4 +11,5 @@ var onChange = function() {
 	var selectValue = d3.select('select').property('value');
   console.log("Current company = " + selectValue);
   current_company = selectValue;
+  updateChart();
 };
