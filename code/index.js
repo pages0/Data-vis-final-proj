@@ -25,7 +25,7 @@ var stockLine = d3.line()
 
 var trendLine =d3.line()
     .x(function(d) { return scaleTime(d.Date);} )
-    .y(function(d) { return scaleSocial(d.SearchIndex);});
+    .y(function(d) { return scaleSocial(d.Popularity);});
 
 // queue data for loading here 
 d3.queue()
@@ -46,17 +46,14 @@ d3.queue()
       for (d of united_google_trends){
 	  d.Date = parseTime(d.Date);
 	  dates.push(d.Date);
-	  console.log(d);
-	  console.log(d.Date);
-	  console.log(d.SearchIndex);
-	  d.SearchIndex = +d.SearchIndex;
+	  d.Popularity = +d.Popularity;
       }      
 
 
       scaleTime.domain(d3.extent(dates, function(d) { return d; }));
       
       scaleStock.domain(d3.extent(united_stock, function(d) { return d.Close; }));
-      scaleSocial.domain(d3.extent(united_google_trends, function(d) { return d.SearchIndex; }));
+      scaleSocial.domain(d3.extent(united_google_trends, function(d) { return d.Popularity; }));
       
       g.append("g")
 	  .attr("transform", "translate(0," + svg_height + ")")
