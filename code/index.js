@@ -4,7 +4,7 @@
 d3.select("body").append("svg").attr("width", 960).attr("height",500);
 
 var svg = d3.select("svg"),
-    margin = {top: 20, right: 20, bottom: 30, left: 50},
+    margin = {top: 20, right: 50, bottom: 30, left: 50},
     svg_width = +svg.attr("width") - margin.left - margin.right,
     svg_height = +svg.attr("height") - margin.top - margin.bottom,
     g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
@@ -35,24 +35,26 @@ d3.queue()
 
       united_google_trends=united_google_trends.reverse();
       // process data here!
-      //console.log("stock: ");
+      var dates = [];
+
       for (d of united_stock){
 	  d.Date = parseTime(d.Date);
-	  //console.log(d.Date);
+	  dates.push(d.Date);
 	  d.Close = +d.Close;
       }
-      console.log("trends: ");
+
       for (d of united_google_trends){
 	  d.Date = parseTime(d.Date);
+	  dates.push(d.Date);
+	  console.log(d);
 	  console.log(d.Date);
+	  console.log(d.SearchIndex);
 	  d.SearchIndex = +d.SearchIndex;
       }      
-      console.log(d3.extent(united_stock, function(d) { return d.Date; }));
-      console.log(d3.max(united_stock, function(d) { return d.Date; }));
-      console.log(d3.min(united_stock, function(d) { return d.Date; }));
-      console.log(d3.min(united_google_trends, function(d) { return d.Date; }));
+
+
+      scaleTime.domain(d3.extent(dates, function(d) { return d; }));
       
-      scaleTime.domain(d3.extent(united_stock, function(d) { return d.Date; }));
       scaleStock.domain(d3.extent(united_stock, function(d) { return d.Close; }));
       scaleSocial.domain(d3.extent(united_google_trends, function(d) { return d.SearchIndex; }));
       
@@ -71,10 +73,21 @@ d3.queue()
 	  .attr("text-anchor", "end")
 	  .text("Price ($)");
 
+      g.append("g")
+	  .call(d3.axisRight(scaleSocial))
+      	  .attr("transform", "translate(" + svg_width + ")")
+	  .append("text")
+	  .attr("fill", "#000")
+	  .attr("transform", "rotate(-90)")
+	  .attr("y", 6)
+	  .attr("dy", "0.71em")
+	  .attr("text-anchor", "end")
+	  .text("Social");
+
        g.append("path")
 	  .datum(united_google_trends)
 	  .attr("fill", "none")
-	  .attr("stroke", "steelblue")
+	  .attr("stroke", "green")
 	  .attr("stroke-linejoin", "round")
 	  .attr("stroke-linecap", "round")
 	  .attr("stroke-width", 1.5)
