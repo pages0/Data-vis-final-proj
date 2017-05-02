@@ -29,7 +29,11 @@ d3.queue()
 
 function displayData(FileName) {
   d3.select("svg").remove();
-  d3.select('#svg_area').append("svg").attr("width", 800).attr("height",450);
+  d3.select('#svg_area').append("svg").attr("width", 800).attr("height",450)
+  //.style("opacity",0)
+  //.transition()
+  //.duration(1000)
+  //.style("opacity",1);
 
   var svg = d3.select("svg"),
   margin = {top: 20, right: 50, bottom: 30, left: 50},
@@ -134,7 +138,11 @@ function displayData(FileName) {
         .attr("stroke-linejoin", "round")
         .attr("stroke-linecap", "round")
         .attr("stroke-width", 1.5)
-        .attr("d", trendLine);
+        .attr("d", trendLine)
+        .style("opacity",0)
+        .transition()
+        .duration(1000)
+        .style("opacity",1);
 
         g.append("path")
         .datum(data_stock)
@@ -143,7 +151,11 @@ function displayData(FileName) {
         .attr("stroke-linejoin", "round")
         .attr("stroke-linecap", "round")
         .attr("stroke-width", 1.5)
-        .attr("d", stockLine);
+        .attr("d", stockLine)
+        .style("opacity",0)
+        .transition()
+        .duration(1000)
+        .style("opacity",1);
 
       });
     }
