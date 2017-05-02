@@ -33,7 +33,8 @@ function displayData(FileName) {
 
   // just an example call, FileName works but we need to figute out the sliding
   // date window to properly use this.
-  // Date format = YYYYMMDD with no dashes. 
+  // Date format = YYYYMMDD with no dashes.
+
   reset_news();
   makeNYTAPICall(FileName,'20170301','20170401');
 
