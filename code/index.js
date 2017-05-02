@@ -1,7 +1,9 @@
 /* Created  on 4-17-17 by Nick Roberson, Reilly Grant, and Connor GT */
 // Used https://bl.ocks.org/mbostock/3883245
 
-displayData('AMAZON');
+var NYTData = null;
+
+displayData('AMAZON_INC');
 
 d3.queue()
 .defer( d3.csv, 'data/NAMES.csv' )
@@ -29,6 +31,14 @@ d3.queue()
 
 
 function displayData(FileName) {
+
+  // just an example call, FileName works but we need to figute out the sliding
+  // date window to properly use this.
+  // Date format = YYYYMMDD with no dashes.
+
+  reset_news();
+  makeNYTAPICall(FileName,'20170301','20170401');
+
   d3.select("svg").remove();
   d3.select('#svg_area').append("svg").attr("width", 800).attr("height",450)
   //.style("opacity",0)
