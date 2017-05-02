@@ -29,10 +29,12 @@ var makeNYTAPICall = function(company_name, begin_date, end_date) {
 var set_news = function(news) {
   console.log(news.response.docs);
   var news_list = d3.select('#news');
-
+  var date = "";
   for(story of news.response.docs) {
     console.log(story.snippet);
-    news_list.append('p').html("<strong style='font-size:15pt'>" + story.headline.main + "</strong> <br/>" + story.snippet);
+    date = story.pub_date.substring(0,10);
+    news_list.append('p').html("<strong style='font-size:13pt'>" + story.headline.main + "</strong> <br/>"
+                               + date + "<br/> <strong>Snippet:</strong> " + story.snippet);
   };
 };
 
