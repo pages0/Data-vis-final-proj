@@ -27,6 +27,7 @@ d3.queue()
 
 
 
+
 function displayData(FileName) {
   d3.select("svg").remove();
   d3.select('#svg_area').append("svg").attr("width", 800).attr("height",450)
@@ -38,9 +39,9 @@ function displayData(FileName) {
   var svg = d3.select("svg"),
   margin = {top: 20, right: 50, bottom: 30, left: 50},
   svg_width = +svg.attr("width") - margin.left - margin.right,
-  svg_height = +svg.attr("height") - margin.top - margin.bottom,
-  g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
+      svg_height = +svg.attr("height") - margin.top - margin.bottom,
+      g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");    
+    
   // parse by year-month-day
   var parseTime = d3.timeParse("%Y-%m-%d");
 
@@ -144,18 +145,82 @@ function displayData(FileName) {
         .duration(1000)
         .style("opacity",1);
 
-        g.append("path")
+      g.append("path")
         .datum(data_stock)
         .attr("fill", "none")
         .attr("stroke", "steelblue")
         .attr("stroke-linejoin", "round")
         .attr("stroke-linecap", "round")
-        .attr("stroke-width", 1.5)
-        .attr("d", stockLine)
-        .style("opacity",0)
-        .transition()
-        .duration(1000)
-        .style("opacity",1);
+          .attr("stroke-width", 1.5)
+          .attr("d", stockLine)
+	  .style("opacity",0)
+	  .transition()
+          .duration(1000)
+          .style("opacity",1);
+
+      // Adding Tool tips
+      // From an obsure place on stack exchange
+
+      svg.selectAll('.stock-tip')
+	  .data(data_stock)
+	  .enter()
+	  .append("circle")
+	  .attr("r",1.7)
+	  .style("fill", "steelblue")
+	  .style("pointer-events","all")
+	  .attr('cx', function(d){
+	      return margin.left+scaleTime(d.Date);
+	  })
+      	  .attr('cy', function(d){
+	      return margin.top+scaleStock(d.Close);
+	  }).on('mouseover',function(d){
+	      d3.selectAll('div.stock-tip-text')
+		  .remove();
+	      d3.select(this)
+		  .transition()
+		  .style('fill','red')
+		  .attr('r',5);
+	      d3.select('body')
+		  .append('div')
+		  .attr('class','stock-tip-text')
+		  .html('<p>' + "Date: " + d.Date + '</br>Closing Price: ' + d.Close + '</p>')
+	  }).on('mouseout',function() {
+	      d3.select(this)
+		  .transition()
+		  .style('fill','steelblue')
+		  .attr('r',1.7);
+	  });
+      
+      svg.selectAll('.social-tip')
+	  .data(data_google_trends)
+	  .enter()
+	  .append("circle")
+	  .attr("r",1.7)
+	  .style("fill", "green")
+	  .style("pointer-events","all")
+	  .attr('cx', function(d){
+	      return margin.left+scaleTime(d.Date);
+	  })
+      	  .attr('cy', function(d){
+	      return margin.top+scaleSocial(d.Popularity);
+	  }).on('mouseover',function(d){
+	      d3.selectAll('div.google-tip-text')
+		  .remove();
+	      d3.select(this)
+		  .transition()
+		  .style('fill','red')
+		  .attr('r',5);
+	      d3.select('body')
+		  .append('div')
+		  .attr('class','google-tip-text')
+		  .html('<p>' + "Date: " + d.Date + '</br>Popularity: ' + d.Popularity + '</p>')
+	  }).on('mouseout',function() {
+	      d3.select(this)
+		  .transition()
+		  .style('fill','green')
+		  .attr('r',1.7);
+	  });
+	      
 
       });
     }
