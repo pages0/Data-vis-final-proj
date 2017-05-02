@@ -3,7 +3,7 @@
 
 var NYTData = null;
 
-displayData('AMAZON');
+displayData('AMAZON_INC');
 
 d3.queue()
 .defer( d3.csv, 'data/NAMES.csv' )

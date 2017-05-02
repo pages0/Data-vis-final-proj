@@ -1,5 +1,5 @@
 Name,FileName
-Amazon,AMAZON
+Amazon Inc,AMAZON_INC
 JP Morgan,JP_MORGAN_CHASE
 Pepsi,PEPSI
 Southwest Airlines,SOUTHWEST_AIRLINES
@@ -7,4 +7,4 @@ Starbucks,STARBUCKS
 Tesla,TESLA
 United Airlines,UNITED
 Wells Fargo,WELLS_FARGO
-Wendys,WENDYS
+Wendy's,WENDYS
