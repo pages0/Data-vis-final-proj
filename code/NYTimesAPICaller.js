@@ -23,8 +23,15 @@ var makeNYTAPICall = function(company_name, begin_date, end_date) {
 
 var set_news = function(news) {
   console.log(news.response.docs);
+  var news_list = d3.select('#news');
+
   for(story of news.response.docs) {
     console.log(story.snippet);
+    news_list.append('p').text(story.snippet);
   };
-
 };
+
+var reset_news = function() {
+  var news_list = d3.select('#news').selectAll('p').remove();
+
+}

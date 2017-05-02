@@ -8,3 +8,8 @@
 .sidebar-height {
   height: 500px;
 }
+
+.scroll-news {
+  overflow: scroll;
+  height: 350px;
+}
