@@ -1,6 +1,8 @@
 /* Created  on 4-17-17 by Nick Roberson, Reilly Grant, and Connor GT */
 // Used https://bl.ocks.org/mbostock/3883245
 
+var NYTData = null;
+
 displayData('AMAZON');
 
 d3.queue()
@@ -28,6 +30,8 @@ d3.queue()
 
 
 function displayData(FileName) {
+  makeNYTAPICall('Amazon','20170301','20170401');
+
   d3.select("svg").remove();
   d3.select('#svg_area').append("svg").attr("width", 800).attr("height",450)
   //.style("opacity",0)

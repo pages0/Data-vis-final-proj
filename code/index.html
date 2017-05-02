@@ -6,13 +6,13 @@
     <title>Popularity vs. Price</title>
     <link rel="stylesheet" type="text/css" href="lab.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    
+
     <!-- IMPORT BOOTSTRAP -->
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-    
+
     <link rel="stylesheet" type="text/css" href="lab.css">
-    
+
     <script src="crossfilter.min.js"></script>
     <script type="text/javascript" src="https://d3js.org/d3.v4.min.js"></script>
     <script src="http://d3js.org/topojson.v1.min.js"></script>
@@ -23,7 +23,7 @@
     <script type="text/javascript" src="https://d3js.org/d3.v4.min.js"></script>
 
   </head>
-  <body>    
+  <body>
       <h1>Popularity vs. Price <small>Nick Roberson, Reilly Grant, and Connor GT</small></h1>
     </div>
     <div class="row">
@@ -31,13 +31,14 @@
         <div class="well well-lg sidebar-height">
           <h3 class="center-block"> Companies </h3>
           <div class="center-block" id="filters">
-	    
+
 	  </div>
         </div>
       </div>
       <div class="col-lg-9 standard-padding">
         <h2 id="svg-title">Popularity V.S. Price</h2>
         <div id="svg_area"></div>
+        <script type="text/javascript" src="NYTimesAPICaller.js"></script>
         <script type="text/javascript" src="helpers.js"></script>
         <script type="text/javascript" src="index.js"></script>
       </div>
