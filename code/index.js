@@ -205,7 +205,7 @@ function displayData(FileName) {
 	  .data(data_google_trends)
 	  .enter()
 	  .append("circle")
-	  .attr("r",1.7)
+	  .attr("r",3)
 	  .style("fill", "green")
 	  .style("pointer-events","all")
 	  .attr('cx', function(d){
@@ -228,7 +228,7 @@ function displayData(FileName) {
 	      d3.select(this)
 		  .transition()
 		  .style('fill','green')
-		  .attr('r',1.7);
+		  .attr('r',3);
 	  });
 	      
 
