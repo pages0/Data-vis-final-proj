@@ -229,6 +229,13 @@ function displayData(FileName) {
 		  .transition()
 		  .style('fill','green')
 		  .attr('r',3);
+	  }).on('click', function(d){
+	      console.log((d.Date));
+	      console.log((d.Date.getMonth()));
+	      console.log((d.Date.getDay()));
+	      console.log((d.Date.getFullYear()));
+	      console.log(formatDate(d.Date));
+	      //makeNYTAPICall(FileName,'20170301','20170401');
 	  });
 	      
 
