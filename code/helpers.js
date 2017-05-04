@@ -6,9 +6,9 @@ function formatDate (d){
     var month;
     var year;
     var weekago = new Date(d.getTime() -(60)*60*24*1*1000);
-    return [""+d.getFullYear()+"|"+dateParseHelper(d.getMonth())+"|"+dateParseHelper(d.getDay()),
-	    ""+weekago.getFullYear()+"|"+dateParseHelper(weekago.getMonth())+"|"+
-	    dateParseHelper(weekago.getDay())];
+    return [""+weekago.getFullYear()+dateParseHelper(weekago.getMonth())+
+    dateParseHelper(weekago.getDay()),
+    ""+d.getFullYear()+dateParseHelper(d.getMonth())+dateParseHelper(d.getDay())];
 }
 
 
