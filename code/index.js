@@ -50,8 +50,8 @@ function displayData(FileName) {
   margin = {top: 20, right: 50, bottom: 30, left: 50},
   svg_width = +svg.attr("width") - margin.left - margin.right,
       svg_height = +svg.attr("height") - margin.top - margin.bottom,
-      g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");    
-    
+      g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
   // parse by year-month-day
   var parseTime = d3.timeParse("%Y-%m-%d");
 
@@ -199,8 +199,11 @@ function displayData(FileName) {
 		  .transition()
 		  .style('fill','steelblue')
 		  .attr('r',1.7);
-	  });
-      
+	  }).style("opacity",0)
+	    .transition()
+      .duration(1000)
+      .style("opacity",1);
+
       svg.selectAll('.social-tip')
 	  .data(data_google_trends)
 	  .enter()
@@ -235,9 +238,15 @@ function displayData(FileName) {
 	      console.log((d.Date.getDay()));
 	      console.log((d.Date.getFullYear()));
 	      console.log(formatDate(d.Date));
+        var dateRange = formatDate(d.Date);
+        reset_news();
+        makeNYTAPICall(FileName,dateRange[0],dateRange[1]);
 	      //makeNYTAPICall(FileName,'20170301','20170401');
-	  });
-	      
+	  }).style("opacity",0)
+	    .transition()
+      .duration(1000)
+      .style("opacity",1);
+
 
       });
     }
