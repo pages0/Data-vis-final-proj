@@ -28,8 +28,6 @@ d3.queue()
 });
 
 
-
-
 function displayData(FileName) {
 
   // just an example call, FileName works but we need to figute out the sliding
@@ -40,17 +38,50 @@ function displayData(FileName) {
   makeNYTAPICall(FileName,'20170301','20170401');
 
   d3.select("svg").remove();
-  d3.select('#svg_area').append("svg").attr("width", 800).attr("height",450)
+  d3.select('#svg_area').append("svg").attr("width", 850).attr("height",450)
   //.style("opacity",0)
   //.transition()
   //.duration(1000)
-  //.style("opacity",1);
+    //.style("opacity",1);
 
   var svg = d3.select("svg"),
-  margin = {top: 20, right: 50, bottom: 30, left: 50},
+  margin = {top: 20, right: 200, bottom: 30, left: 50},
   svg_width = +svg.attr("width") - margin.left - margin.right,
       svg_height = +svg.attr("height") - margin.top - margin.bottom,
       g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+    var legend_titles = ["Stock Price","Google Tends"];
+    var legend_colors = ["steelblue","green"];
+    
+    // Generate a legend
+    for(var i=0; i<=1; i++) {
+      svg.append('rect')
+        .attr('x', svg.attr("width") - 150)
+        .attr('y', 100 + 30 * i)
+        .attr('width', 25)
+        .attr('height', 25)
+        .attr('stroke', '#000')
+        .attr('stroke-width', '0.5px')
+	.attr('fill',legend_colors[i]);
+      
+      svg.append('text')
+        .attr('x', svg.attr("width") - 120)
+        .attr('y', 118 + 30 * i)
+        .attr('font-family', 'sans-serif')
+        .attr('font-size', '10pt')
+        .text(legend_titles[i]);
+    }
+
+    var data_titles = ["stock-date","stock-data","pop-date","pop-data"];
+
+    for(var i=0; i<4; i++) {
+      svg.append('text')
+        .attr('x', svg.attr("width") - 150)
+        .attr('y', 178 + 30 * i)
+        .attr('font-family', 'sans-serif')
+        .attr('font-size', '10pt')
+        .attr('id',data_titles[i]);
+    }
 
   // parse by year-month-day
   var parseTime = d3.timeParse("%Y-%m-%d");
@@ -190,10 +221,10 @@ function displayData(FileName) {
 		  .transition()
 		  .style('fill','red')
 		  .attr('r',5);
-	      d3.select('body')
-		  .append('div')
-		  .attr('class','stock-tip-text')
-		  .html('<p>' + "Date: " + d.Date + '</br>Closing Price: ' + d.Close + '</p>')
+	      d3.select('#stock-date')
+		  .text("Date: "+d.Date);	 
+	      d3.select('#stock-data')
+		  .text('Closing Price: ' + d.Close);
 	  }).on('mouseout',function() {
 	      d3.select(this)
 		  .transition()
@@ -223,21 +254,21 @@ function displayData(FileName) {
 		  .transition()
 		  .style('fill','red')
 		  .attr('r',5);
-	      d3.select('body')
-		  .append('div')
-		  .attr('class','google-tip-text')
-		  .html('<p>' + "Date: " + d.Date + '</br>Popularity: ' + d.Popularity + '</p>')
+	      d3.select('#pop-date')
+		  .text("Date: " + d.Date);
+	      d3.select('#pop-data')
+		  .text('Popularity: ' + d.Popularity);
 	  }).on('mouseout',function() {
 	      d3.select(this)
 		  .transition()
 		  .style('fill','green')
 		  .attr('r',3);
 	  }).on('click', function(d){
-	      console.log((d.Date));
+	      /*console.log((d.Date));
 	      console.log((d.Date.getMonth()));
 	      console.log((d.Date.getDay()));
 	      console.log((d.Date.getFullYear()));
-	      console.log(formatDate(d.Date));
+	      console.log(formatDate(d.Date)); */
         var dateRange = formatDate(d.Date);
         reset_news();
         makeNYTAPICall(FileName,dateRange[0],dateRange[1]);
