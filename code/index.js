@@ -231,6 +231,12 @@ function displayData(FileName) {
 		  .transition()
 		  .style('fill','steelblue')
 		  .attr('r',1.7);
+	  }).on('click', function(d){	     
+              var dateRange = formatDate(d.Date);
+              reset_news();
+              makeNYTAPICall(FileName,dateRange[0],dateRange[1]);
+	      //console.log(dateRange);
+	      //console.log(d.Date);
 	  }).style("opacity",0)
 	    .transition()
       .duration(1000)
@@ -266,15 +272,11 @@ function displayData(FileName) {
 		  .style('fill','green')
 		  .attr('r',3);
 	  }).on('click', function(d){
-	      /*console.log((d.Date));
-	      console.log((d.Date.getMonth()));
-	      console.log((d.Date.getDay()));
-	      console.log((d.Date.getFullYear()));
-	      console.log(formatDate(d.Date)); */
         var dateRange = formatDate(d.Date);
         reset_news();
-        makeNYTAPICall(FileName,dateRange[0],dateRange[1]);
-	      //makeNYTAPICall(FileName,'20170301','20170401');
+              makeNYTAPICall(FileName,dateRange[0],dateRange[1]);
+	      //console.log(dateRange);
+	      //console.log(d.Date);
 	  }).style("opacity",0)
 	    .transition()
       .duration(1000)
