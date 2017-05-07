@@ -5,6 +5,9 @@ var makeNYTAPICall = function(company_name, begin_date, end_date) {
   if(company_name.includes('_')) {
     company_name = company_name.replace("_"," ");
   }
+    if( company_name == 'WENDYS'){
+	company_name ='WENDY\'S'
+    }
   var url = base_url + '?' + $.param({
     'api-key': "55d0b896b15d4157bb77cf88f0c6625b",
     'q' : company_name,
