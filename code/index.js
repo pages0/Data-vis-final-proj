@@ -222,9 +222,10 @@ function displayData(FileName) {
 		  .style('fill','red')
 		  .attr('r',5);
 	      d3.select('#stock-date')
-		  .text("Date: "+d.Date);	 
+		  .text("Date: " + (d.Date.getMonth()+1)+
+			'/'+d.Date.getUTCDate()+'/'+d.Date.getFullYear());	 
 	      d3.select('#stock-data')
-		  .text('Closing Price: ' + d.Close);
+		  .text('Closing Price: ' + (Math.floor(d.Close*100)/100));
 	  }).on('mouseout',function() {
 	      d3.select(this)
 		  .transition()
@@ -255,7 +256,8 @@ function displayData(FileName) {
 		  .style('fill','red')
 		  .attr('r',5);
 	      d3.select('#pop-date')
-		  .text("Date: " + d.Date);
+		  .text("Date: " + (d.Date.getMonth()+1)+
+			'/'+d.Date.getUTCDate()+'/'+d.Date.getFullYear());
 	      d3.select('#pop-data')
 		  .text('Popularity: ' + d.Popularity);
 	  }).on('mouseout',function() {
