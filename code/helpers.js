@@ -22,3 +22,16 @@ function dateParseHelper (num){
     }
 
 }
+
+function appendLine(x1,y1,x2,y2) {
+  var line = d3.select('svg').append("line")
+        .attr("class","mouse_line")
+        .attr("x1", x1)
+        .attr("y1", y1)
+        .attr("x2", x2)
+        .attr("y2", y2)
+}
+
+function removeLine() {
+  d3.select('svg').selectAll('mouse_line').remove();
+}

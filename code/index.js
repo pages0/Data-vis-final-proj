@@ -44,15 +44,31 @@ function displayData(FileName) {
   //.duration(1000)
     //.style("opacity",1);
 
-  var svg = d3.select("svg"),
-  margin = {top: 20, right: 200, bottom: 30, left: 50},
-  svg_width = +svg.attr("width") - margin.left - margin.right,
-      svg_height = +svg.attr("height") - margin.top - margin.bottom,
-      g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+  var svg = d3.select("svg");
+  var margin = {top: 20, right: 200, bottom: 30, left: 50};
+  var svg_width = +svg.attr("width") - margin.left - margin.right;
+  var svg_height = +svg.attr("height") - margin.top - margin.bottom;
+  var g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-    var legend_titles = ["Stock Price","Google Tends"];
-    var legend_colors = ["steelblue","green"];
-    
+  var legend_titles = ["Stock Price","Google Tends"];
+  var legend_colors = ["steelblue","green"];
+
+  var line = d3.select('svg').append("line")
+        .attr("class","mouse_line")
+        .attr("x1", 0)
+        .attr("y1", svg_height + margin.top)
+        .attr("x2", 0)
+        .attr("y2", margin.top);
+
+  svg.on('mousemove', function() {
+    var mouse_x = d3.mouse(this);
+    if(mouse_x[0] > margin.left && mouse_x[0] < svg_width + margin.left) {
+      var x = mouse_x[0];
+      line.attr("x1",x+"px");
+      line.attr("x2",x+"px");
+    }
+  });
+
     // Generate a legend
     for(var i=0; i<=1; i++) {
       svg.append('rect')
@@ -63,7 +79,7 @@ function displayData(FileName) {
         .attr('stroke', '#000')
         .attr('stroke-width', '0.5px')
 	.attr('fill',legend_colors[i]);
-      
+
       svg.append('text')
         .attr('x', svg.attr("width") - 120)
         .attr('y', 118 + 30 * i)
@@ -223,7 +239,7 @@ function displayData(FileName) {
 		  .attr('r',5);
 	      d3.select('#stock-date')
 		  .text("Date: " + (d.Date.getMonth()+1)+
-			'/'+d.Date.getUTCDate()+'/'+d.Date.getFullYear());	 
+			'/'+d.Date.getUTCDate()+'/'+d.Date.getFullYear());
 	      d3.select('#stock-data')
 		  .text('Closing Price: ' + (Math.floor(d.Close*100)/100));
 	  }).on('mouseout',function() {
@@ -231,7 +247,7 @@ function displayData(FileName) {
 		  .transition()
 		  .style('fill','steelblue')
 		  .attr('r',1.7);
-	  }).on('click', function(d){	     
+	  }).on('click', function(d){
               var dateRange = formatDate(d.Date);
               reset_news();
               makeNYTAPICall(FileName,dateRange[0],dateRange[1]);
