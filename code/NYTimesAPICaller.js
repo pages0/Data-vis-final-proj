@@ -5,9 +5,9 @@ var makeNYTAPICall = function(company_name, begin_date, end_date) {
   if(company_name.includes('_')) {
     company_name = company_name.replace("_"," ");
   }
-    if( company_name == 'WENDYS'){
-	company_name ='WENDY\'S'
-    }
+  if(company_name == 'WENDYS'){
+	  company_name ='WENDY\'S'
+  }
   var url = base_url + '?' + $.param({
     'api-key': "55d0b896b15d4157bb77cf88f0c6625b",
     'q' : company_name,
@@ -16,7 +16,6 @@ var makeNYTAPICall = function(company_name, begin_date, end_date) {
     'hl' : 'true',
     'sort' : 'newest'
   });
-
   $.ajax({
     url: url,
     method: 'GET',
@@ -42,5 +41,4 @@ var set_news = function(news) {
 
 var reset_news = function() {
   var news_list = d3.select('#news').selectAll('p').remove();
-
 }
