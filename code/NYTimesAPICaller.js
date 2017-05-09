@@ -37,7 +37,7 @@ var set_news = function(news) {
   for(story of news.response.docs) {
 
     date = story.pub_date.substring(0,10);
-    news_list.append('p').html("<strong style='font-size:13pt'>" + story.headline.main + "</strong> <br/>"
+    news_list.append('div').attr('class','card').html("<strong style='font-size:13pt'>" + story.headline.main + "</strong> <br/>"
                                + date + "<br/> <strong>Snippet:</strong> " + story.snippet);
   };
 };
