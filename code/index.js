@@ -77,7 +77,7 @@ function displayData(FileName) {
         .attr('height', 25)
         .attr('stroke', '#000')
         .attr('stroke-width', '0.5px')
-	.attr('fill',legend_colors[i]);
+	      .attr('fill',legend_colors[i]);
 
       svg.append('text')
         .attr('x', svg.attr("width") - 120)
@@ -222,21 +222,21 @@ function displayData(FileName) {
 	  .style("pointer-events","all")
 	  .attr('cx', function(d){
 	      return margin.left+scaleTime(d.Date);
-	  })
-      	  .attr('cy', function(d){
+	   })
+     .attr('cy', function(d){
 	      return margin.top+scaleStock(d.Close);
-	  }).on('mouseover',function(d){
-	      d3.selectAll('div.stock-tip-text')
-		  .remove();
-	      d3.select(this)
-		  .transition()
-		  .style('fill','red')
-		  .attr('r',5);
-	      d3.select('#stock-date')
-		  .text("Date: " + (d.Date.getMonth()+1)+
-			'/'+d.Date.getUTCDate()+'/'+d.Date.getFullYear());
-	      d3.select('#stock-data')
-		  .text('Closing Price: ' + (Math.floor(d.Close*100)/100));
+	   }).on('mouseover',function(d){
+	        d3.selectAll('div.stock-tip-text')
+		      .remove();
+	        d3.select(this)
+		      .transition()
+          .style('border','2px solid steelblue')
+		      .attr('r',5);
+	        d3.select('#stock-date')
+		        .text("Date: " + (d.Date.getMonth()+1)+
+			      '/'+d.Date.getUTCDate()+'/'+d.Date.getFullYear());
+	        d3.select('#stock-data')
+		        .text('Closing Price: ' + (Math.floor(d.Close*100)/100));
 	  }).on('mouseout',function() {
 	      d3.select(this)
 		  .transition()
@@ -265,10 +265,10 @@ function displayData(FileName) {
 	      return margin.top+scaleSocial(d.Popularity);
 	  }).on('mouseover',function(d){
 	      d3.selectAll('div.google-tip-text')
-		  .remove();
+		      .remove();
 	      d3.select(this)
-		  .transition()
-		  .style('fill','red')
+		      .transition()
+      .style('border','2px solid green')
 		  .attr('r',5);
 	      d3.select('#pop-date')
 		  .text("Date: " + (d.Date.getMonth()+1)+
