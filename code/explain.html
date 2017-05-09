@@ -1,38 +1,62 @@
-<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
-<html> <head>
-<title>Visualization Explaination</title>
-<link rel="stylesheet" type="text/css" href="lab.css">
-<meta charset="utf-8">
-</head>
-<body>
-<h2>What this visualization does:</h2>
-Our visualization includes a plot with an x-axis of time and
-two y-axes. One y-axis is the stock values of a company,
-and the other is its popularity in google trends.This plot
-graphs changes in stock prices over time as well as changes in
-search popularity.
-</p>
+<!DOCTYPE html>
+<html>
+  <head>
 
-<p>
-<h2>How to use this visualization:</h2>
-You can select the company for which to display data by using the menu to the
-left. To examine the specific data of a specific point, mouse over
-it. The date, and values will be displayed to the
-right. Additionally, if you are curious about what events were occurring at a
-specific point, clicking on the point will display relevent New York Times
-articles from around that time.
-</p>
+    <meta charset="utf-8">
+    <title>Search Interest and Stock Prices</title>
+    <link rel="stylesheet" type="text/css" href="lab.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 
-<p>
-<h2>How the data was prepared:</h2>
-We obtained the stock data we used for this visualization from Yahoo, and
-the trends data from Google Trends. When the data didn't specify when the
-day of the month as part of the date, we arbitrarily set the date to the first
-day of the month so that the data could still be displayed.
-</p>
-<p></p>
-<a href ="index.html">Return to visualization</a>
+    <!-- IMPORT BOOTSTRAP -->
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" type="text/css" href="lab.css">
+
+    <script src="crossfilter.min.js"></script>
+    <script type="text/javascript" src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="http://d3js.org/topojson.v1.min.js"></script>
 
 
-</body>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- IMPORT D3 -->
+    <script type="text/javascript" src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
+
+  </head>
+  <body class="standard-padding">
+      <h1>Search Interest and Stock Prices <small>Nick Roberson, Reilly Grant, and Connor GT</small></h1>
+      <ol class="breadcrumb">
+        <li><a href="index.html">Visualization</a></li>
+        <li><a href="explain.html" class="active">Explanation</a></li>
+      </ol>
+    </div>
+    <p>
+    <h2>What this visualization does:</h2>
+        Our visualization includes a plot with an x-axis of time and
+        two y-axes. One y-axis is the stock values of a company,
+        and the other is its popularity in google trends.This plot
+        graphs changes in stock prices over time as well as changes in
+        search popularity.
+      </p>
+
+      <p>
+        <h2>How to use this visualization:</h2>
+        You can select the company for which to display data by using the menu to the
+        left. To examine the specific data of a specific point, mouse over
+        it. The date, and values will be displayed to the
+        right. Additionally, if you are curious about what events were occurring at a
+        specific point, clicking on the point will display relevent New York Times
+        articles from around that time.
+      </p>
+
+  <p>
+      <h2>How the data was prepared:</h2>
+      We obtained the stock data we used for this visualization from Yahoo, and
+      the trends data from Google Trends. When the data didn't specify when the
+      day of the month as part of the date, we arbitrarily set the date to the first
+      day of the month so that the data could still be displayed.
+  </p>
+ </body>
 </html>
