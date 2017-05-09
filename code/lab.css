@@ -46,3 +46,11 @@
 ::-webkit-scrollbar {
     display: none;
 }
+
+#element::-webkit-scrollbar {
+    display: none;
+}
+
+::-webkit-scrollbar {
+    display: block;
+}
