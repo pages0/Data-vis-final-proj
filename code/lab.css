@@ -33,12 +33,16 @@
 }
 
 .scroll-news {
-  background-color: #000000;
   overflow: scroll;
   height: 350px;
+  padding: 0px 0px 0px 0px;
 }
 
 .mouse_line {
   stroke : #474747;
   stroke-width : 1px;
+}
+
+::-webkit-scrollbar {
+    display: none;
 }

@@ -17,7 +17,7 @@ d3.queue()
   .on('change',function() {
     displayData(d3.select(this).node().value);
   });
-    
+
   dropDown.selectAll('option')
   .data(names)
   .enter()
@@ -32,8 +32,8 @@ d3.queue()
 //Displays the data associated with the filename given
 function displayData(FileName) {
 
-    //Resets the news display, and sets the default time frame
-    reset_news();
+  //Resets the news display, and sets the default time frame
+  reset_news();
   makeNYTAPICall(FileName,'20170301','20170401');
 
     //Update the SVG
@@ -120,7 +120,7 @@ function displayData(FileName) {
   .defer( d3.csv, 'data/'+FileName+'_STOCK.csv' )
   .defer( d3.csv, 'data/'+FileName+'_GOOGLE_TRENDS.csv' )
   .await( function(error, data_stock, data_google_trends ) {
-     
+
     for (d of data_stock){
       d.Date = parseTime(d.Date);
       d.Close = +d.Close;

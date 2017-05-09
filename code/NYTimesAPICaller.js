@@ -43,5 +43,5 @@ var set_news = function(news) {
 };
 
 var reset_news = function() {
-  var news_list = d3.select('#news').selectAll('p').remove();
+  var news_list = d3.select('#news').selectAll('div').remove();
 }
