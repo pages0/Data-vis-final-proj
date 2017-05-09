@@ -1,0 +1,69 @@
+\documentclass[12pt]{article}
+
+\usepackage{latexsym,amssymb,amsthm,amsmath,amscd,multirow,marvosym,fixltx2e,tikzsymbols}
+
+\usepackage{tikz,latexsym,amssymb,amsthm,amsmath,amscd,multirow,marvosym,mathrsfs,fixltx2e}
+\usetikzlibrary{svg.path}
+
+
+\setlength{\oddsidemargin}{0cm}
+\setlength{\evensidemargin}{0cm}
+\setlength{\textwidth}{6.5in}
+\setlength{\headheight}{-.5 in}
+\setlength{\topmargin}{0in}
+\setlength{\textheight}{9 in}
+
+
+
+\begin{document}
+
+\begin{center} 
+  CSC 395 Spring 2017 \\
+  Report\\
+  by Connor Gregorich-Trevor, Nick Roberson, and Reilly Noonan Grant\\
+  Due: May 12th \\
+
+----------------------------------------------------------------------------------------------------------------------- \end{center}
+
+\begin{enumerate}
+  \item[Introduction] 
+    
+    Our goal was to visualize the relationship between stock price and social media interest 
+    in various companies. We later scaled this back to examining the relationship between 
+    stock price and ``search interest'', for which we used Yahoo Stocks and Google trends. 
+    We did this by creating a plot which simultaneously graphed the google trend data and
+    historical stock price for a company, then added the ability to switch between companies
+    displayed. We decided that it would be helpful if users could see events which occured 
+    around the same time shifts in stock price or search interest, so we added functionality 
+    so that if one clicks on a data point, the visualization displays New York Times articles
+    related to the company that appeared in the month leading up to the date of the data point.
+    We also added functionality so that when one of these data points is moused over 
+    the legend will display the exact data that the data point contains. Over the course of
+    implementing this project, we learned that the javascript date library can be difficult 
+    to work with, that good data can be hard to find, and that the relationship between 
+    stock price and social media interest can often be difficult to fully understand.
+    
+    
+  \item[Motivation] 
+    As social media becomes increasingly important in the world, and companies care more about 
+    their presence on social media, understanding the impact that popular attention has on companies 
+    becomes more important. By helping users visualize the relationship between search trends
+    and stock prices, we allow them to explore the effect of social media presence. Being able to 
+    explore in this way is particularly important, as the relationship between stock price and social
+    media data is not always easy to understand. Social media attention can be positive or negative
+    for a company, depending on the context. Because of this, the combination of a graph 
+    and related New York Times headlines allows users to more easily to understand the historical 
+    context of shifts in stock, or popularity. With this graph, the user can answer not only 
+    questions such as ''Does the price of stock generally increase when social media attention increases,"
+    but also ''What events led up to such a drastic reduction in stock price and increase in social media attention for Delta Airlines in 2017?''
+
+  \item[Results]
+
+
+  \item[Reflection]
+  
+  \item[Conclusion]
+
+
+\end{enumerate}
+\end{document}
