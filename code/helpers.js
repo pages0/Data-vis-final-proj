@@ -1,6 +1,7 @@
 
 //http://stackoverflow.com/questions/8489500/how-do-i-subtract-one-week-from-this-date-in-jquery
 
+//Format dates to make using the New York Times API Easier
 function formatDate (d){
     var day;
     var month;
@@ -23,6 +24,7 @@ function dateParseHelper (num){
 
 }
 
+//Appends the vertical line seen in the visualization
 function appendLine(x1,y1,x2,y2) {
   var line = d3.select('svg').append("line")
         .attr("class","mouse_line")

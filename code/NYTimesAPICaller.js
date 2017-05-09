@@ -1,6 +1,8 @@
 // Built by LucyBot. www.lucybot.com
 var base_url = "https://api.nytimes.com/svc/search/v2/articlesearch.json";
 
+//Given the formated begining and ending dates,
+// as well as the company name, calls the New York Times API
 var makeNYTAPICall = function(company_name, begin_date, end_date) {
   if(company_name.includes('_')) {
     company_name = company_name.replace("_"," ");
@@ -28,6 +30,7 @@ var makeNYTAPICall = function(company_name, begin_date, end_date) {
   });
 };
 
+//Updates the visual display of the news
 var set_news = function(news) {
 
   var news_list = d3.select('#news');

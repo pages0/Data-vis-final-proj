@@ -3,8 +3,10 @@
 
 var NYTData = null;
 
+//Display Amazon by Default
 displayData('AMAZON_INC');
 
+// Read in the list of possible companies to search through
 d3.queue()
 .defer( d3.csv, 'data/NAMES.csv' )
 .await(function(error , names) {
@@ -15,7 +17,7 @@ d3.queue()
   .on('change',function() {
     displayData(d3.select(this).node().value);
   });
-
+    
   dropDown.selectAll('option')
   .data(names)
   .enter()
@@ -27,22 +29,16 @@ d3.queue()
   });
 });
 
-
+//Displays the data associated with the filename given
 function displayData(FileName) {
 
-  // just an example call, FileName works but we need to figute out the sliding
-  // date window to properly use this.
-  // Date format = YYYYMMDD with no dashes.
-
-  reset_news();
+    //Resets the news display, and sets the default time frame
+    reset_news();
   makeNYTAPICall(FileName,'20170301','20170401');
 
+    //Update the SVG
   d3.select("svg").remove();
   d3.select('#svg_area').append("svg").attr("width", 850).attr("height",450)
-  //.style("opacity",0)
-  //.transition()
-  //.duration(1000)
-    //.style("opacity",1);
 
   var svg = d3.select("svg");
   var margin = {top: 20, right: 200, bottom: 30, left: 50};
@@ -50,9 +46,7 @@ function displayData(FileName) {
   var svg_height = +svg.attr("height") - margin.top - margin.bottom;
   var g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-  var legend_titles = ["Stock Price","Google Tends"];
-  var legend_colors = ["steelblue","green"];
-
+    // Generate the mouse line
   var line = d3.select('svg').append("line")
         .attr("class","mouse_line")
         .attr("x1", 0)
@@ -68,6 +62,10 @@ function displayData(FileName) {
       line.attr("x2",x+"px");
     }
   });
+
+        // Generate a legend
+  var legend_titles = ["Stock Price","Google Tends"];
+  var legend_colors = ["steelblue","green"];
 
     // Generate a legend
     for(var i=0; i<=1; i++) {
@@ -88,6 +86,7 @@ function displayData(FileName) {
         .text(legend_titles[i]);
     }
 
+    //Add to the the legend
     var data_titles = ["stock-date","stock-data","pop-date","pop-data"];
 
     for(var i=0; i<4; i++) {
@@ -120,25 +119,19 @@ function displayData(FileName) {
   .defer( d3.csv, 'data/'+FileName+'_STOCK.csv' )
   .defer( d3.csv, 'data/'+FileName+'_GOOGLE_TRENDS.csv' )
   .await( function(error, data_stock, data_google_trends ) {
-
-    data_google_trends=data_google_trends.reverse();
-    // process data here!
-    var dates = [];
-
-
+     
     for (d of data_stock){
       d.Date = parseTime(d.Date);
-      dates.push(d.Date);
       d.Close = +d.Close;
     }
 
     for (d of data_google_trends){
       d.Date = parseTime(d.Date);
-      dates.push(d.Date);
       d.Popularity = +d.Popularity;
     }
 
-    // min and max dates
+      // Parses the date information so that we can restrict the x axis to dates
+      //that are covered by both the stock and trends data
     var maxDate_google_trends = d3.max(data_google_trends, function(d) { return d.Date });
     var maxDate_data_stock = d3.max(data_stock, function(d) { return d.Date });
     var minDate_google_trends = d3.min(data_google_trends, function(d) { return d.Date });
@@ -158,11 +151,12 @@ function displayData(FileName) {
           return d.Date < maxExtent && d.Date > minExtent;
         });
 
-        // Scales the graph
+        // Scale the graph
         scaleTime.domain([minExtent, maxExtent]);
         scaleStock.domain(d3.extent(data_stock, function(d) { return d.Close; }));
         scaleSocial.domain(d3.extent(data_google_trends, function(d) { return d.Popularity; }));
 
+      //Append the Axis, and the Lines
         g.append("g")
         .attr("transform", "translate(0," + svg_height + ")")
         .call(d3.axisBottom(scaleTime))
@@ -251,8 +245,6 @@ function displayData(FileName) {
               var dateRange = formatDate(d.Date);
               reset_news();
               makeNYTAPICall(FileName,dateRange[0],dateRange[1]);
-	      //console.log(dateRange);
-	      //console.log(d.Date);
 	  }).style("opacity",0)
 	    .transition()
       .duration(1000)
@@ -291,8 +283,6 @@ function displayData(FileName) {
         var dateRange = formatDate(d.Date);
         reset_news();
               makeNYTAPICall(FileName,dateRange[0],dateRange[1]);
-	      //console.log(dateRange);
-	      //console.log(d.Date);
 	  }).style("opacity",0)
 	    .transition()
       .duration(1000)
