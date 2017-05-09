@@ -38,7 +38,8 @@ function displayData(FileName) {
 
     //Update the SVG
   d3.select("svg").remove();
-  d3.select('#svg_area').append("svg").attr("width", 850).attr("height",450)
+  d3.select('#svg_area').append("svg").attr("width", 950).attr("height",450)
+
 
   var svg = d3.select("svg");
   var margin = {top: 20, right: 200, bottom: 30, left: 50};
