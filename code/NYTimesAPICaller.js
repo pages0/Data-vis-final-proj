@@ -53,4 +53,23 @@ var reset_news = function() {
                     .transition(500)
                       .style('opacity','0')
                     .remove();
+  //getSentiment("asdf");
 }
+/*
+var getSentiment = function(text) {
+  var html = "https://api.aylien.com/api/v1/sentiment";
+  var AYLIENTextAPI = require(['aylien_textapi'],function(aylien_textapi){});
+  var textapi = new AYLIENTextAPI({
+    application_id: "207135a8",
+    application_key: "69ea7bcfdfbc85b581238c7c5288aa01"
+  });
+
+  textapi.sentiment({
+    'text': 'John is a very good football player!'
+  }, function(error, response) {
+    if (error === null) {
+      console.log(response);
+    }
+  });
+}
+*/
