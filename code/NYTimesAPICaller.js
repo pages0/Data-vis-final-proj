@@ -22,7 +22,7 @@ var makeNYTAPICall = function(company_name, begin_date, end_date) {
     url: url,
     method: 'GET',
   }).done(function(result) {
-    //console.log(result);
+    console.log(result);
     set_news(result);
   }).fail(function(err) {
     throw err;
@@ -37,11 +37,39 @@ var set_news = function(news) {
   for(story of news.response.docs) {
 
     date = story.pub_date.substring(0,10);
-    news_list.append('div').attr('class','card').html("<strong style='font-size:13pt'>" + story.headline.main + "</strong> <br/>"
-                               + date + "<br/> <strong>Snippet:</strong> " + story.snippet);
+    news_list.append('div')
+              .attr('class','card')
+              .style('opacity','0')
+              .html("<a href=" + story.web_url + "> <strong style='font-size:13pt'>" + story.headline.main + "</strong></a> <br/>"
+                     + date + "<br/> <strong>Snippet:</strong> " + story.snippet)
+              .transition(500)
+                .style('opacity','1');
   };
 };
 
 var reset_news = function() {
-  var news_list = d3.select('#news').selectAll('div').remove();
+  var news_list = d3.select('#news')
+                    .selectAll('div')
+                    .transition(500)
+                      .style('opacity','0')
+                    .remove();
+  //getSentiment("asdf");
 }
+/*
+var getSentiment = function(text) {
+  var html = "https://api.aylien.com/api/v1/sentiment";
+  var AYLIENTextAPI = require(['aylien_textapi'],function(aylien_textapi){});
+  var textapi = new AYLIENTextAPI({
+    application_id: "207135a8",
+    application_key: "69ea7bcfdfbc85b581238c7c5288aa01"
+  });
+
+  textapi.sentiment({
+    'text': 'John is a very good football player!'
+  }, function(error, response) {
+    if (error === null) {
+      console.log(response);
+    }
+  });
+}
+*/
